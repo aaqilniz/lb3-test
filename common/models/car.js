@@ -22,4 +22,19 @@ module.exports = function (Car) {
     context.instance.code = (new Date % 9e6).toString(36);
     next();
   });
+
+  Car.compatibleTyres = (callback) => {
+    callback(null, { done: true });
+  };
+
+  Car.remoteMethod('compatibleTyres', {
+    http: {
+      path: '/compatible-tyres',
+      verb: 'get',
+    },
+    returns: {
+      arg: 'done',
+      type: Boolean,
+    },
+  });
 };

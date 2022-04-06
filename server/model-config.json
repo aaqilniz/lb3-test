@@ -46,10 +46,10 @@
   },
   "car": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "tyre": {
     "dataSource": "db",
-    "public": false
+    "public": true
   }
 }

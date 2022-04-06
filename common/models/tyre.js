@@ -16,4 +16,19 @@ module.exports = function (Tyre) {
       next();
     });
   });
+
+  Tyre.compatibleCars = (callback) => {
+    callback(null, { done: true });
+  };
+
+  Tyre.remoteMethod('compatibleCars', {
+    http: {
+      path: '/compatible-cars',
+      verb: 'get',
+    },
+    returns: {
+      arg: 'done',
+      type: Boolean,
+    },
+  });
 };
