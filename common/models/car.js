@@ -1,3 +1,4 @@
+/* eslint-disable padded-blocks */
 /* eslint-disable object-curly-spacing */
 /* eslint-disable space-before-function-paren */
 'use strict';
@@ -14,17 +15,22 @@ module.exports = function (Car) {
       if (!brand) {
         return next(new Error('No brand found with provided Id for car'));
       }
-      next();
+      return next();
     });
   });
 
   Car.observe('before save', function (context, next) {
     context.instance.code = (new Date % 9e6).toString(36);
-    next();
+    return next();
   });
 
-  Car.compatibleTyres = (callback) => {
-    callback(null, { done: true });
+  Car.compatibleTyres = async (carId) => {
+    const car = await Car.findOne({ where: { id: carId } });
+    if (!car) return [];
+    const tyreModel = app.models.Tyre;
+    const tyres = await tyreModel.find({ where: { tyreSize: car.tyreSize }, });
+    if (!tyres.length) return [];
+    return tyres;
   };
 
   Car.remoteMethod('compatibleTyres', {
@@ -32,9 +38,14 @@ module.exports = function (Car) {
       path: '/compatible-tyres',
       verb: 'get',
     },
+    accepts: {
+      arg: 'carId',
+      type: 'number',
+      required: true,
+    },
     returns: {
-      arg: 'done',
-      type: Boolean,
+      arg: 'data',
+      type: 'array',
     },
   });
 };

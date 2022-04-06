@@ -17,8 +17,13 @@ module.exports = function (Tyre) {
     });
   });
 
-  Tyre.compatibleCars = (callback) => {
-    callback(null, { done: true });
+  Tyre.compatibleCars = async (tyreId) => {
+    const tyre = await Tyre.findOne({ where: { id: tyreId } });
+    if (!tyre) return [];
+    const carModel = app.models.Car;
+    const cars = await carModel.find({ where: { tyreSize: tyre.tyreSize }, });
+    if (!cars.length) return [];
+    return cars;
   };
 
   Tyre.remoteMethod('compatibleCars', {
@@ -26,9 +31,14 @@ module.exports = function (Tyre) {
       path: '/compatible-cars',
       verb: 'get',
     },
+    accepts: {
+      arg: 'tyreId',
+      type: 'number',
+      required: true,
+    },
     returns: {
-      arg: 'done',
-      type: Boolean,
+      arg: 'data',
+      type: 'array',
     },
   });
 };

@@ -22,44 +22,49 @@ const data = {
   cars: [
     {
       model: 'CarModelA',
-      tyreSize: 'XYZ',
+      tyreSize: 10,
       brandId: 1,
     },
     {
       model: 'CarModelB',
-      tyreSize: 'XYZ',
+      tyreSize: 20,
       brandId: 2,
     },
     {
       model: 'CarModelC',
-      tyreSize: 'XYZ',
+      tyreSize: 30,
       brandId: 1,
     },
     {
       model: 'CarModelD',
-      tyreSize: 'XYZ',
+      tyreSize: 40,
       brandId: 2,
     },
   ],
   tyres: [
     {
       model: 'TyreModelA',
-      tyreSize: 'XYZ',
+      tyreSize: 10,
       brandId: 3,
     },
     {
       model: 'TyreModelB',
-      tyreSize: 'XYZ',
+      tyreSize: 10,
       brandId: 4,
     },
     {
       model: 'TyreModelC',
-      tyreSize: 'XYZ',
+      tyreSize: 20,
       brandId: 3,
     },
     {
       model: 'TyreModelD',
-      tyreSize: 'XYZ',
+      tyreSize: 30,
+      brandId: 4,
+    },
+    {
+      model: 'TyreModelD',
+      tyreSize: 100,
       brandId: 4,
     },
   ],

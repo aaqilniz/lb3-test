@@ -10,7 +10,7 @@
       "type": "string"
     },
     "tyreSize": {
-      "type": "string"
+      "type": "number"
     }
   },
   "validations": [],
